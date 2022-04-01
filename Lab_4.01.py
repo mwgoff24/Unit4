@@ -32,6 +32,7 @@ Example output:
 
     >>> python3 de_vowel_lab.py
     Ths sntnc hs n vwls
+
 Bonus
 Use a counter (variable you define outside of a loop to keep track of a value inside a loop) to create a function count_vowels.
 
@@ -39,3 +40,28 @@ count_vowels takes in a string and returns an int representing the number of vow
 
 Can you think of an alternate way to do complete this task without any loop or counter, by making use of your new de_vowel() function instead?
 '''
+# remove the vowels
+vowels = 'AaEeIiOoUu'
+
+def de_vowel(str):
+    no_vowels = ''
+    global vowels
+    for letter in str:
+        if letter not in vowels:
+            no_vowels += letter
+
+    return no_vowels
+
+# count the vowels
+def count_vowels(str):
+    global vowels
+    count = 0
+    for letter in str:
+        if letter in vowels:
+            count += 1
+
+    return count
+
+new_str = input("Give a string to devowel: ")
+print(f"There are {count_vowels(new_str)} vowels. \n"
+f"Your devoweled string is: {de_vowel(new_str)}")
