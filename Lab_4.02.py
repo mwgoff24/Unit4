@@ -88,6 +88,9 @@ The function will reverse the strings in the list by calling the my_reverse func
 
 
 # pluralize words
+
+# what I did
+'''
 letter_y = 'y'
 word_list = ['apple', 'berry', 'melon']
 def pluralize_words(list):
@@ -102,11 +105,20 @@ def pluralize_words(list):
             list[item] = no_y
         else:
             list[item] += 's'
-
+'''
+# better solution
+def pluralize_words(list):
+    for c in range(len(list)):
+        if list[c][-1] == 'y':
+            list[c] = list[c][:len(list[c]) - 1] + 'ies'
+        else:
+            list[c] += 's'
 # test code
+word_list = ['apple', 'berry', 'melon']
 print(f"Singular words: {word_list}")
 pluralize_words(word_list)
 print(f"No longer singular words: {word_list}")
+
 
 # reverse string
 def my_reverse(string_to_reverse):
@@ -115,13 +127,16 @@ def my_reverse(string_to_reverse):
         reversed = letters + reversed
     return reversed
 
+# test code
 print(my_reverse("apples"))
 
 # reverse strings in list
 def reverse_strings_in_list(list):
+    reversed_list = []
     for item in list:
-        my_reverse(item)
-    return item
+        reversed_list.append(my_reverse(item))
+    return reversed_list
 
+# test code
 reverse_list = ['apple', 'berry', 'melon']
 print(reverse_strings_in_list(reverse_list))
