@@ -85,54 +85,73 @@ def my_function():
     # replace 'pass' with your code
     pass
 '''
-# def draw_7():
-#     # 7 rows of stars
-#     for item in range(7):
-#         # row of stars
-#         my_string = ''
-#         for item in range(7):
-#             my_string += ' *'
-#         print(my_string)
+def draw_7():
+    # 7 rows of stars
+    for item in range(7):
+        # row of stars
+        my_string = ''
+        for item in range(7):
+            my_string += ' *'
+        print(my_string)
 
-# draw_7()
+print("\n")
+draw_7()
+print("\n")
 
-# def stars_and_stripes():
-#     for i in range(3):
-#         # 3 rows of stars and stripes
-#         my_string = ""
-#         for i in range(7):
-#             # row of stars
-#             my_string += ' *'
-#         print(my_string)
-#         dash_string = ""
-#         for i in range(7):
-#             # row of stripes
-#             dash_string += ' -'
-#         print(dash_string)
-#     print(my_string)
+def stars_and_stripes():
+    # 3 rows of stars and stripes
+    for i in range(3):
+        my_string = ""
+        # row of stars
+        for i in range(7):
+            my_string += ' *'
+        print(my_string)
+        dash_string = ""
+        # row of stripes
+        for i in range(7):
+            dash_string += ' -'
+        print(dash_string)
+    print(my_string)
 
-# stars_and_stripes()
+stars_and_stripes()
+print("\n")
 
 def increasing_triangle():
     triangle_string = ""
     for i in range(1, 8):
-        triangle_string += str(i)
+        triangle_string += str(i) + " "
+        print(triangle_string)
 
 increasing_triangle()
+print("\n")
 
-# def vertical_stars_and_stripes():
-#     my_string = ''
-#     for item in range(0, 7):
-#         my_string += ' - * - * - * - \n'
-#     print(my_string)
+def vertical_stars_and_stripes():
+    # 7 rows
+    for i in range(7):
+        my_string = ""
+        # one row
+        for i in range(3):
+            my_string += ' -'
+            my_string += ' *'
+        my_string += ' -'
+        print(my_string)
 
-# vertical_stars_and_stripes()
+vertical_stars_and_stripes()
+print("\n")
 
-# def my_function():
-#     rows = 3
-#     for item in range(rows):
-#         for row in range(item + 1):
-#             print('* ', end = "")
-#         print("\n")
+'''
+Since I can't easily explain what this number grouping is, this is how my_function looks:
+2 1
+2 1 3 2
+2 1 3 2 4 3
+2 1 3 2 4 3 5 4
+'''
 
-# my_function()
+def my_function():
+    my_string = ""
+    for i in range(1, 5):
+        my_string += str(i + 1) + " "
+        my_string += str(i) + " "
+        print(my_string)
+
+my_function()
