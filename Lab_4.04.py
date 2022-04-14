@@ -114,34 +114,25 @@ for i in range(len(shopping_lists)):
 '''
 
 # functions
-# def update_list(list_num, item_num, new_item):
-#     shopping_lists[int(list_num)-1][int(item_num)-1] = new_item
-#     print(shopping_lists)
 
-# def print_item(list_num, item_num):
-#     print(shopping_lists[int(list_num)-1][int(item_num)-1])
+# update list, user updates whatever item from whatever list they choose
+def update_list(list_num, item_num, new_item):
+    shopping_lists[int(list_num)-1][int(item_num)-1] = new_item
+    print('\n')
+    print(shopping_lists)
+    print('\n')
+
+# print item, prints whatever item from whatever list the user chooses
+def print_item(list_num, item_num):
+    print('\n')
+    print(shopping_lists[int(list_num)-1][int(item_num)-1])
+    print('\n')
     
-
-# def print_list(list_num):
-#     print(shopping_lists[int(list_num)-1])
-
-# # inputs
-# choice = input("Choose either: 1 = update item, 2 = view item,  3 = view list: ")
-# if choice == '1':
-#     list_choice = input("What list number, 1, 2, or 3, contains the item you would like to update? ")
-#     item_choice = input("What item number would you like to update? ")
-#     new_item = input("What item do you want to add? ")
-#     update_list(list_choice, item_choice, new_item)
-# elif choice == '2':
-#     list_choice = input("What list would you like to view, 1, 2, or 3? ")
-#     item_choice = input("What item would you like to view from this list, 1, 2, or 3? ")
-#     print_item(list_choice, item_choice)
-# elif choice == '3':
-#     list_choice = input("What list would you like to view, 1, 2, or 3? ")
-#     print_list(list_choice)
-
-
-# part 2
+# print list, prints whatever list the user chooses
+def print_list(list_num):
+    print('\n')
+    print(shopping_lists[int(list_num)-1])
+    print('\n')
 
 # all in one, combines all lists into one
 def all_in_one():
@@ -149,9 +140,9 @@ def all_in_one():
     for list in shopping_lists:
         for item in list:
             new_list.append(item)
+    print('\n')
     print(new_list)
-
-all_in_one()
+    print('\n')
 
 # count q-tips, displays a count of how many q-tips are in shopping_lists
 def count_qtips():
@@ -160,35 +151,73 @@ def count_qtips():
         for item in list:
             if item == 'q-tips':
                 qtip_count += 1
+    print('\n')
     print(f"You have {qtip_count} q-tips.")
-
-count_qtips()
+    print('\n')
 
 # drink more milk, adds milk to lists that don't already contain it
 def drink_more_milk():
     for list in shopping_lists:
         if 'milk' not in list:
             list.append('milk')
+    print('\n')
     print(shopping_lists)
+    print('\n')
 
-drink_more_milk()
-
-# if you give a mouse a cookie, adds cookies to lists with milk in them
+# if you give a mouse a cookie, updates each milk to say milk and cookies
 def if_you_give_a_mouse_a_cookie():
     for list in shopping_lists:
         if 'milk' in list:
-            list.append('cookies')
+            list.pop(list.index('milk'))
+            list.append('milk and cookies')
+    print('\n')
     print(shopping_lists)
-
-if_you_give_a_mouse_a_cookie()
-
-# extension
+    print('\n')
 
 # reverse all, reverses lists and items in lists
-shopping_cart = [
-    ['q-tips', 'pencils', 'planner'],
-    ['apples', 'candy', 'milk'],
-    ['milk', 'q-tips', 'tooth paste']
-]
-def reverse_all():
-    pass
+def reverse_all(list):
+    for lists in list:
+        list.reverse()
+        for items in lists:
+            lists.reverse()
+    print('\n')
+    print(list)
+    print('\n')
+
+# inputs
+while True:
+    choice = input("Choose either: 1 = update item, \n"
+    "2 = view item, \n"
+    "3 = view list, \n"
+    "4 = combine lists, \n"
+    "5 = count q-tips, \n"
+    "6 = add milk to lists that don't have it, \n"
+    "7 = make milk say milk and cookies, \n"
+    "8 = reverse everything, \n"
+    "9 = quit program: ")
+    if choice == '1':
+        list_choice = input("What list number, 1, 2, or 3, contains the item you would like to update? ")
+        item_choice = input("What item number would you like to update? ")
+        new_item = input("What item do you want to add? ")
+        update_list(list_choice, item_choice, new_item)
+    elif choice == '2':
+        list_choice = input("What list would you like to view, 1, 2, or 3? ")
+        item_choice = input("What item would you like to view from this list, 1, 2, or 3? ")
+        print_item(list_choice, item_choice)
+    elif choice == '3':
+        list_choice = input("What list would you like to view, 1, 2, or 3? ")
+        print_list(list_choice)
+    elif choice == '4':
+        all_in_one()
+    elif choice == '5':
+        count_qtips()
+    elif choice == '6':
+        drink_more_milk()
+    elif choice == '7':
+        if_you_give_a_mouse_a_cookie()
+    elif choice == '8':
+        reverse_all(shopping_lists)
+    elif choice == '9':
+        break
+    else:
+        print("That's not an available command.")
