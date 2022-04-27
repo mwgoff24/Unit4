@@ -42,69 +42,96 @@ Do not allow a user to overwrite a spot on the board where a play has already be
 # variables
 player1 = input("What is your name, player 1? ")
 player2 = input("What is your name, player 2? ")
+current_player = player1
+
 
 board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+turns = 0
 
 # functions
 
 # replace, replaces whatever spot the player chose with their respective marker
-def replace(spot, letter):
-    if spot > 9 or spot < 1:
-        print("That's not a valid spot.")
+def replace(letter):
+    global turns
+    valid_spot = False
+    while valid_spot == False:
+        spot = int(input(f"Choose the spot you would like to place your marker on, {current_player}. "))
+        if spot < 1 or spot > 9:
+            print("That's not a valid spot.")
+        elif spot == "X" or spot == "O":
+            print("That's not a valid spot.")
+        else:
+            valid_spot = True
     for i in range(len(board)):
         for j in range(len(board[i])):
             if spot == board[i][j]:
                 board[i][j] = letter
-                print(
-                f"{board[0][0]} | {board[0][1]} | {board[0][2]} \n"
-                "--------- \n"
-                f"{board[1][0]} | {board[1][1]} | {board[1][2]} \n"
-                "--------- \n"
-                f"{board[2][0]} | {board[2][1]} | {board[2][2]}")
+                turns +=1
+
 
 # check win horizontal, checks each row after each turn to see if all the spots are filled with the same marker
 def check_win_horizontal(letter, player):
-    global gameplay, board
+    global turns, board
     for row in board:
         if row == [letter, letter, letter]:
             print(f"{player} has won.")
-            gameplay = False
+            turns = 9
 
 # check win vertical, checks each column after each turn to see if all the spots are filled with the same marker
 def check_win_vertical(letter, player):
-    global gameplay, board
-    for i in range(len(board)):
-        if board[0][0] == letter and board[1][0] == letter and board[2][0] == letter:
-            print(f"{player} has won.")
-            gameplay = False
-        elif board[0][1] == letter and board[1][1] == letter and board[2][1] == letter:
-            print(f"{player} has won.")
-            gameplay = False
-        elif board[0][2] == letter and board[1][2] == letter and board[2][2] == letter:
-            print(f"{player} has won.")
-            gameplay = False
+    global turns, board
+    if board[0][0] == letter and board[1][0] == letter and board[2][0] == letter:
+        print(f"{player} has won.")
+        turns = 9
+    elif board[0][1] == letter and board[1][1] == letter and board[2][1] == letter:
+        print(f"{player} has won.")
+        turns = 9
+    elif board[0][2] == letter and board[1][2] == letter and board[2][2] == letter:
+        print(f"{player} has won.")
+        turns = 9
 
-
+# check win diagonal, checks each diagonal after each turn to see if all the spots are filled with the same marker
 def check_win_diagonal(letter, player):
-    global gameplay, board
-    for i in range(len(board)):
-        if board[0][0] == letter and board[1][1] == letter and board[2][2] == letter:
-            print(f"{player} has won.")
-            gameplay = False
-        elif board[0][2] == letter and board[1][1] == letter and board[2][0] == letter:
-            print(f"{player} has won.")
-            gameplay = False
+    global turns, board
+    if board[0][0] == letter and board[1][1] == letter and board[2][2] == letter:
+        print(f"{player} has won.")
+        turns = 9
+    elif board[0][2] == letter and board[1][1] == letter and board[2][0] == letter:
+        print(f"{player} has won.")
+        turns = 9
+
+# print board, prints the entire board implemented after
+def print_board():
+    global board
+    print(
+            f"{board[0][0]} | {board[0][1]} | {board[0][2]} \n"
+            "--------- \n"
+            f"{board[1][0]} | {board[1][1]} | {board[1][2]} \n"
+            "--------- \n"
+            f"{board[2][0]} | {board[2][1]} | {board[2][2]}")
 
 # game loop
-gameplay = True
-while gameplay == True:
-    choice1 = int(input(f"Choose the spot you would like to place your X on, {player1}. "))
-    replace(choice1, "X")
-    check_win_horizontal("X", player1)
-    check_win_vertical("X", player1)
-    check_win_diagonal("X", player1)
-    choice2 = int(input(f"Choose the spot you would like to place your O on, {player2}. "))
-    replace(choice2, "O")
-    check_win_horizontal("O", player2)
-    check_win_vertical("O", player2)
-    check_win_diagonal("O", player2)
+while turns < 9:
+    current_player = player1
+    replace("X")
+    print_board()
+
+# all check different types of wins
+    check_win_horizontal("X", current_player)
+    check_win_vertical("X", current_player)
+    check_win_diagonal("X", current_player)
+
+    if turns >= 9:
+        break
+
+    current_player = player2
+    replace("O")
+    print_board()
+
+# all check different types of wins
+    check_win_horizontal("O", current_player)
+    check_win_vertical("O", current_player)
+    check_win_diagonal("O", current_player)
+
+    if turns >= 9:
+        break
