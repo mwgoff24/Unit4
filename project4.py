@@ -54,14 +54,14 @@ turns = 0
 def replace(letter):
     global turns
     valid_spot = False
+    # checks to see if input is 1 through 9
     while valid_spot == False:
         spot = int(input(f"Choose the spot you would like to place your marker on, {current_player}. "))
         if spot < 1 or spot > 9:
-            print("That's not a valid spot.")
-        elif spot == "X" or spot == "O":
-            print("That's not a valid spot.")
+            print(f"That's not a valid spot, {current_player}.")
         else:
             valid_spot = True
+    # replaces the number on the board with the letter
     for i in range(len(board)):
         for j in range(len(board[i])):
             if spot == board[i][j]:
@@ -100,7 +100,7 @@ def check_win_diagonal(letter, player):
         print(f"{player} has won.")
         turns = 9
 
-# print board, prints the entire board implemented after
+# print board, prints the entire board and is implemented after each turn
 def print_board():
     global board
     print(
