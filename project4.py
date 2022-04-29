@@ -1,5 +1,3 @@
-# tic tac toe revisited
-
 '''
 Using Python, students will create a Tic-Tac-Toe game. This project has two parts:
 
@@ -39,11 +37,13 @@ Check for a winner horizontally, vertically, and on both diagonals.
 
 Do not allow a user to overwrite a spot on the board where a play has already been made.
 '''
+# tic tac toe revisited
+
+
 # variables
 player1 = input("What is your name, player 1? ")
 player2 = input("What is your name, player 2? ")
 current_player = player1
-
 
 board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 turns = 0
@@ -75,30 +75,36 @@ def check_win_horizontal(letter, player):
     for row in board:
         if row == [letter, letter, letter]:
             print(f"{player} has won.")
-            turns = 9
+
+            turns = 10
 
 # check win vertical, checks each column after each turn to see if all the spots are filled with the same marker
 def check_win_vertical(letter, player):
     global turns, board
+    # first column
     if board[0][0] == letter and board[1][0] == letter and board[2][0] == letter:
         print(f"{player} has won.")
-        turns = 9
+        turns = 10
+    # second column
     elif board[0][1] == letter and board[1][1] == letter and board[2][1] == letter:
         print(f"{player} has won.")
-        turns = 9
+        turns = 10
+    # third column
     elif board[0][2] == letter and board[1][2] == letter and board[2][2] == letter:
         print(f"{player} has won.")
-        turns = 9
+        turns = 10
 
 # check win diagonal, checks each diagonal after each turn to see if all the spots are filled with the same marker
 def check_win_diagonal(letter, player):
     global turns, board
+    # left to right
     if board[0][0] == letter and board[1][1] == letter and board[2][2] == letter:
         print(f"{player} has won.")
-        turns = 9
+        turns = 10
+    # right to left
     elif board[0][2] == letter and board[1][1] == letter and board[2][0] == letter:
         print(f"{player} has won.")
-        turns = 9
+        turns = 10
 
 # print board, prints the entire board and is implemented after each turn
 def print_board():
@@ -108,30 +114,45 @@ def print_board():
             "--------- \n"
             f"{board[1][0]} | {board[1][1]} | {board[1][2]} \n"
             "--------- \n"
-            f"{board[2][0]} | {board[2][1]} | {board[2][2]}")
+            f"{board[2][0]} | {board[2][1]} | {board[2][2]} \n")
 
 # game loop
+
+# print statement added here because I can't code the program to recognize if a spot is taken
+# the program does not override the spot or update the turn count if a player tries to place a marker in the spot of another marker
+print(f"Welcome to tic-tac-toe, {player1} and {player2}! Before you start, if a player tries to set their marker on your spot, you need to set your marker on your spot again for gameplay " 
+"purposes. \n"
+f"In other words, if {player1} sets their spot on 1 and {player2} does the same thing afterwards, {player1} needs to set another marker on 1. \n")
 while turns < 9:
     current_player = player1
     replace("X")
     print_board()
 
-# all check different types of wins
+# all check different types of wins to check
     check_win_horizontal("X", current_player)
     check_win_vertical("X", current_player)
     check_win_diagonal("X", current_player)
 
-    if turns >= 9:
+    # first conditional catches a tie
+    if turns == 9:
+        print("Tie game.")
         break
+    # if a win is detected on ANY check_win functions, the function sets turns equal to 10
+    # this conditional will then run and therefore end the game
+    elif turns == 10:
+        break
+    print(turns)
 
+# same code as code for player1
     current_player = player2
     replace("O")
     print_board()
-
-# all check different types of wins
     check_win_horizontal("O", current_player)
     check_win_vertical("O", current_player)
     check_win_diagonal("O", current_player)
-
-    if turns >= 9:
+    if turns == 9:
+        print("Tie game.")
         break
+    elif turns == 10:
+        break
+    print(turns)
